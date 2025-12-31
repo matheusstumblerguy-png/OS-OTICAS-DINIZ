@@ -1,0 +1,234 @@
+/* =====================
+   CONFIGURAÇÕES GERAIS
+===================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #f4f7f6;
+    color: #2d3436;
+    line-height: 1.6;
+    padding: 20px;
+    animation: fadeInPage 0.8s ease-out;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================
+   HEADER ESTILIZADO
+===================== */
+header {
+    background: #ffffff;
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border-top: 6px solid #b00000;
+}
+
+header img {
+    /* Ajustado para um tamanho visível, já que no HTML estava 5000 */
+    max-height: 1000px; 
+    width: auto;
+    margin-bottom: 15px;
+    transition: transform 0.4s ease;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
+
+header h2 {
+    color: #b00000;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+header p {
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+/* =====================
+   SEÇÕES (CARDS)
+===================== */
+section {
+    background: #ffffff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+section h3 {
+    color: #b00000;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f1f1;
+    display: flex;
+    align-items: center;
+}
+
+/* =====================
+   GRIDS E INPUTS
+===================== */
+.grid-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #636e72;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-top: 6px;
+    padding: 10px 14px;
+    border: 1.5px solid #e1e8ef;
+    border-radius: 8px;
+    background: #fdfdfd;
+    font-size: 0.95rem;
+    color: #2d3436;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #b00000;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(176, 0, 0, 0.1);
+}
+
+/* =====================
+   TABELAS PROFISSIONAIS
+===================== */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+th {
+    background: #f8f9fa;
+    padding: 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #b00000;
+    border-bottom: 2px solid #eee;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+td input {
+    width: 100%;
+    border: 1px solid transparent;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+td input:focus {
+    background: #fff;
+}
+
+/* =====================
+   FINANCEIRO (DESTAQUE)
+===================== */
+.readonly-input {
+    background-color: #f8f9fa !important;
+    border-style: dashed !important;
+    color: #b00000 !important;
+    font-weight: bold;
+}
+
+.saldo-pendente {
+    color: #0984e3 !important;
+    background-color: #ebf5ff !important;
+    border-color: #74b9ff !important;
+}
+
+/* =====================
+   BOTÕES E AÇÕES
+===================== */
+button {
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Botão Adicionar Produto */
+button[onclick="adicionarLinha()"] {
+    background: #28a745 !important;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+
+button[onclick="adicionarLinha()"]:hover {
+    background: #218838 !important;
+    transform: scale(1.05);
+}
+
+/* Botão Gerar PDF Principal */
+#gerarPDF {
+    background: linear-gradient(135deg, #b00000 0%, #ff4d4d 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(176, 0, 0, 0.3);
+}
+
+#gerarPDF:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(176, 0, 0, 0.4);
+}
+
+#gerarPDF:active {
+    transform: translateY(0);
+}
+
+/* =====================
+   RESPONSIVIDADE
+===================== */
+@media (max-width: 768px) {
+    .grid-inputs {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-inputs {
+        grid-template-columns: 1fr;
+    }
+}

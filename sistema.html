@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordem de Serviço - Óticas Diniz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .financeiro {
+            background: #fdfdfd;
+            border: 2px solid #b00000;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .readonly-input {
+            background-color: #eee;
+            font-weight: bold;
+            color: #b00000;
+        }
+        .saldo-pendente {
+            color: blue;
+            font-weight: bold;
+            background-color: #eef;
+        }
+        hr {
+            grid-column: span 12;
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 15px 0;
+        }
+        .btn-remover {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn-remover:hover {
+            background: #a71d2a;
+        }
+        input[type="date"] {
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo diniz.png" alt="Óticas Diniz" height="80">
+        <h2>Óticas Diniz - Vila Matilde</h2>
+        <p>Av. Waldemar Carlos Pereira nº 560</p>
+    </header>
+
+    <main class="container-sistema">
+        <section class="cliente">
+            <h3>Dados do Cliente</h3>
+            <div class="grid-inputs">
+                <label>CEP <input id="cep" placeholder="00000-000" onblur="buscarCEP()"></label>
+                <label>Endereço <input id="endereco"></label>
+                <label>Bairro <input id="bairro"></label>
+                <label>Cidade <input id="cidade"></label>
+                
+                <label>Cliente <input id="cliente"></label>
+                <label>CPF <input id="cpf"></label>
+                <label>Fone <input id="fone"></label>
+                
+                <label>Nascimento <input type="date" id="nascimento" min="1900-01-01" max="2100-12-31"></label>
+                <label>Compra <input type="date" id="compra" min="1900-01-01" max="2100-12-31"></label>
+                <label>Entrega <input type="date" id="entrega" min="1900-01-01" max="2100-12-31"></label>
+                
+                <label>OS <input id="os"></label>
+                <label>Anexo <input id="anexo"></label>
+            </div>
+        </section>
+
+        <section class="lentes">
+            <h3>Lentes e Armação</h3>
+            <div class="grid-inputs">
+                <label>Lentes <input id="lentes"></label>
+                <label>Armação <input id="armacao"></label>
+                <label>Material <input id="material"></label>
+                <label>Usuário <input id="usuario"></label>
+                <label>Obs <input id="obs"></label>
+            </div>
+        </section>
+
+        <section class="produtos">
+            <h3>Produtos (Máximo 8)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Qtd</th>
+                            <th>Produto</th>
+                            <th style="width: 80px;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela-produtos">
+                        <tr>
+                            <td><input class="p-codigo"></td>
+                            <td><input class="p-qtd"></td>
+                            <td><input class="p-nome"></td>
+                            <td style="text-align: center;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" onclick="adicionarLinha()" style="margin-top: 10px; background: #28a745; color: white; padding: 8px; border-radius: 5px; cursor: pointer; border: none;">+ Adicionar Produto</button>
+        </section>
+
+        <section class="medidas-tecnicas">
+            <h3>Medidas Técnicas</h3>
+            <div class="grid-inputs">
+                <label>Ponte <input id="ponte"></label>
+                <label>Aro <input id="aro"></label>
+                <label>Vertical <input id="vertical"></label>
+                <label>Diagonal <input id="diagonal"></label>
+                <label>Base <input id="base"></label>
+            </div>
+        </section>
+
+        <section class="grau">
+            <h3>Receita (Grau)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Olho</th><th>Dist.</th><th>Esf.</th><th>Cil.</th> <th>Eixo</th><th>DNP</th><th>Altura</th><th>Adição</th><th>Prisma</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-grau">
+                        <tr>
+                            <td rowspan="2">OD</td><td>Longe</td>
+                            <td><input id="od_longe_esferico"></td>
+                            <td><input id="od_longe_cilindrico"></td>
+                            <td><input id="od_longe_eixo"></td>
+                            <td><input id="od_longe_dnp"></td>
+                            <td><input id="od_longe_altura"></td>
+                            <td><input id="od_longe_adicao"></td>
+                            <td><input id="od_longe_prisma"></td>
+                        </tr>
+                        <tr>
+                            <td>Perto</td>
+                            <td><input id="od_perto_esferico"></td>
+                            <td><input id="od_perto_cilindrico"></td>
+                            <td><input id="od_perto_eixo"></td>
+                            <td><input id="od_perto_dnp"></td>
+                            <td><input id="od_perto_altura"></td>
+                            <td><input id="od_perto_adicao"></td>
+                            <td><input id="od_perto_prisma"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">OE</td><td>Longe</td>
+                            <td><input id="oe_longe_esferico"></td>
+                            <td><input id="oe_longe_cilindrico"></td>
+                            <td><input id="oe_longe_eixo"></td>
+                            <td><input id="oe_longe_dnp"></td>
+                            <td><input id="oe_longe_altura"></td>
+                            <td><input id="oe_longe_adicao"></td>
+                            <td><input id="oe_longe_prisma"></td>
+                        </tr>
+                        <tr>
+                            <td>Perto</td>
+                            <td><input id="oe_perto_esferico"></td>
+                            <td><input id="oe_perto_cilindrico"></td>
+                            <td><input id="oe_perto_eixo"></td>
+                            <td><input id="oe_perto_dnp"></td>
+                            <td><input id="oe_perto_altura"></td>
+                            <td><input id="oe_perto_adicao"></td>
+                            <td><input id="oe_perto_prisma"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="financeiro">
+            <h3>Financeiro e Pagamentos</h3>
+            <div class="grid-inputs">
+                <p style="grid-column: span 12; font-weight: bold; margin-bottom: 10px;">Formas de Pagamento:</p>
+                
+                <label>Pix <input type="number" id="pix" value="0" oninput="calcularFinanceiro()"></label>
+                <label>Dinheiro <input type="number" id="dinheiro" value="0" oninput="calcularFinanceiro()"></label>
+                <label>Débito <input type="number" id="debito" value="0" oninput="calcularFinanceiro()"></label>
+                <label>Crédito <input type="number" id="credito" value="0" oninput="calcularFinanceiro()"></label>
+                <label>Convênio <input type="number" id="convenio" value="0" oninput="calcularFinanceiro()"></label>
+                <label>A Receber <input type="number" id="a_receber" value="0" oninput="calcularFinanceiro()"></label>
+                <hr>
+                <label>Subtotal <input type="text" id="subtotal" value="0.00" class="readonly-input" readonly></label>
+                <label>Desconto <input type="number" id="desconto" value="0" oninput="calcularFinanceiro()"></label>
+                <label>Total <input type="text" id="total" value="0.00" class="readonly-input" readonly></label>
+            </div>
+        </section>
+
+        <div class="acoes" style="text-align: center; margin-top: 30px; padding-bottom: 50px;">
+            <button id="gerarPDF" class="btn-principal" style="padding: 15px 40px; font-size: 18px;">Salvar e Gerar OS (PDF)</button>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

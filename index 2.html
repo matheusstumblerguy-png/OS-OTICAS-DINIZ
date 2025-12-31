@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Óticas Diniz - Login</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: 
+        linear-gradient(135deg, rgba(140, 0, 0, 0.88) 0%, rgba(30, 0, 0, 0.95) 100%),
+        url("fundo-diniz.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* ===== CONTAINER COMPACTO COM TRANSIÇÃO ===== */
+    .login-container {
+      width: 100%;
+      max-width: 800px; /* Reduzido de 950px para 800px para ficar menor */
+      background: #ffffff;
+      border-radius: 20px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: zoomIn 3.0s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .login-container:hover {
+      transform: scale(1.01);
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6);
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ===== LADO ESQUERDO (LOGO) ===== */
+    .login-logo {
+      flex: 1;
+      background: #fdfdfd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      border-right: 1px solid #f0f0f0;
+    }
+
+    .login-logo img {
+      max-width: 220px; /* Reduzido para proporcionalidade */
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+
+    .login-container:hover .login-logo img {
+      transform: rotate(-2deg) scale(1.05);
+    }
+
+    /* ===== LADO DIREITO (FORMULÁRIO) ===== */
+    .login-form {
+      flex: 1.2;
+      padding: 45px 40px; /* Reduzido para ser mais compacto */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-form h2 {
+      color: #b00000;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      letter-spacing: -1px;
+    }
+
+    .login-form p {
+      color: #636e72;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    /* ===== INPUTS COM FOCO ESTILIZADO ===== */
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      color: #2d3436;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1.5px solid #e9ecef;
+      background: #f8f9fa;
+      font-size: 14px;
+      color: #2d3436;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #b00000;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(176, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ===== CHECKBOX E LINKS ===== */
+    .mostrar-senha {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #636e72;
+      margin: 5px 0 20px 0;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .mostrar-senha input {
+      width: 16px;
+      height: 16px;
+      accent-color: #b00000;
+      cursor: pointer;
+    }
+
+    /* ===== BOTÃO COM EFEITO DE PULSO ===== */
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #b00000 0%, #ff1a1a 100%);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 15px rgba(176, 0, 0, 0.2);
+    }
+
+    button:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(176, 0, 0, 0.35);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* ===== MENSAGEM ===== */
+    .mensagem {
+      margin-top: 15px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      min-height: 20px;
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 800px) {
+      .login-container {
+        flex-direction: column;
+        max-width: 380px;
+      }
+      .login-logo {
+        padding: 30px;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+      }
+      .login-form {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-logo">
+    <img src="logo diniz.png" alt="Óticas Diniz">
+  </div>
+
+  <div class="login-form">
+    <h2>Bem-vindo</h2>
+    <p>Acesse o painel administrativo</p>
+
+    <div class="input-group">
+      <label for="usuario">Usuário</label>
+      <input type="text" id="usuario" placeholder="Seu usuário">
+    </div>
+
+    <div class="input-group">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="Sua senha">
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+        <div class="input-group" style="flex: 1;">
+            <label for="os_login">OS</label>
+            <input type="text" id="os_login" placeholder="Nº">
+        </div>
+        <div class="input-group" style="flex: 1;">
+            <label for="anexo_login">Anexo</label>
+            <input type="text" id="anexo_login" placeholder="Nº">
+        </div>
+    </div>
+
+    <div class="mostrar-senha" onclick="document.getElementById('chk-senha').click()">
+      <input type="checkbox" id="chk-senha" onclick="event.stopPropagation(); mostrarSenha()">
+      <label for="chk-senha">Mostrar senha</label>
+    </div>
+
+    <button type="button" onclick="login()">Entrar no Sistema</button>
+
+    <div class="mensagem" id="mensagem"></div>
+  </div>
+</div>
+
+<script>
+  function mostrarSenha() {
+    const senha = document.getElementById("senha");
+    senha.type = senha.type === "password" ? "text" : "password";
+  }
+
+  function login() {
+    const usuario = document.getElementById("usuario").value.trim();
+    const senha   = document.getElementById("senha").value.trim();
+    const os      = document.getElementById("os_login").value.trim();
+    const anexo   = document.getElementById("anexo_login").value.trim();
+    const msg     = document.getElementById("mensagem");
+
+    if (!usuario || !senha) {
+      msg.textContent = "Preencha usuário e senha!";
+      msg.style.color = "#d32f2f";
+      return;
+    }
+
+    localStorage.setItem("login_os", os);
+    localStorage.setItem("login_anexo", anexo);
+
+    msg.style.color = "#28a745";
+    msg.textContent = "Validando dados...";
+
+    setTimeout(() => {
+      window.location.href = "sistema.html";
+    }, 800);
+  }
+</script>
+
+</body>
+</html>
